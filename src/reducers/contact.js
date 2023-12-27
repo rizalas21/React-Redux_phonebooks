@@ -14,8 +14,15 @@ const contact = (state = initialState, action) => {
         case 'LOAD_PAGE_SUCCESS':
             return { ...state, phonebooks: [...state.phonebooks, ...action.data.phonebooks], page: action.data.page }
 
-        case 'ADD_TODO':
-            return state
+        case 'ADD_PHONEBOOKS_SUCCESS':
+            return [
+                ...state, ...state.phonebooks.filter(data => data.id !== action.data.id),
+                {
+                    id: action.data.id,
+                    name: action.data.name,
+                    phone: action.data.phone
+                }
+            ]
 
         case 'LOAD_PHONEBOOKS_FAILED':
         default:

@@ -19,7 +19,7 @@ export const loadPage = ({ page }) => dispatch => req.get('phonebooks', { params
 })
 
 export const addPhonebooks = (contact) => dispatch => req.post('phonebooks', contact).then(({ data }) => {
-    dispatch({ type: 'ADD_PHONEBOOKS_SUCCESS' })
+    dispatch({ type: 'ADD_PHONEBOOKS_SUCCESS', data })
 }).catch((err) => {
     dispatch({ type: 'ADD_PHONEBOOKS_FAILED' })
 })
