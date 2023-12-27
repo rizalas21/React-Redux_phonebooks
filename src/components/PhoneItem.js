@@ -5,7 +5,6 @@ import { faFloppyDisk, faPenToSquare, faTrashCan } from '@fortawesome/free-solid
 import { Link } from 'react-router-dom'
 
 export default function PhoneItem({ user, remove, update }) {
-    console.log('masuk phoneitem ')
     const [isEdit, setIsEdit] = useState(false)
     const [newData, setNewData] = useState({ name: user.name, phone: user.phone })
 

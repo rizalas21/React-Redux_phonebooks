@@ -33,12 +33,11 @@ function BtnAdd() {
 }
 
 
-export default function SearchBar({ keyword, setKeyword, sort, setSort}) {
+export default function SearchBar({ keyword, setKeyword, sort, setSort }) {
     const handleSearchChange = (event) => {
         const { value } = event.target
         setKeyword(value)
     }
-    console.log('ini sort => ', sort)
     return (
         <div className="all">
             <div className="container-search">

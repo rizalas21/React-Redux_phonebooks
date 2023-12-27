@@ -12,8 +12,7 @@ const contact = (state = initialState, action) => {
             return { ...state, ...action.data, }
 
         case 'LOAD_PAGE_SUCCESS':
-            console.log('ini adalah acrtion', action)
-            return { ...state, ...action.data }
+            return { ...state, phonebooks: [...state.phonebooks, ...action.data.phonebooks], page: action.data.page }
 
         case 'ADD_TODO':
             return state
