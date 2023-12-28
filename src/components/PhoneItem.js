@@ -3,17 +3,35 @@ import '../app.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFloppyDisk, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { deletePhonebooks, updateData } from '../actions/contact'
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
-export default function PhoneItem({ user, remove, update }) {
+export default function PhoneItem({ user, update }) {
     const [isEdit, setIsEdit] = useState(false)
     const [newData, setNewData] = useState({ name: user.name, phone: user.phone })
+    const dispatch = useDispatch()
 
-    function ButtonSave() {
-        return (
-            <button className="btn-edit" onClick={() => { update(user.id, { name: newData.name, phone: newData.phone }); setIsEdit(false) }}>
-                <FontAwesomeIcon icon={faFloppyDisk} />
-            </button>
-        )
+    const submit = (user) => {
+        confirmAlert({
+            title: 'CONFIRM TO DELETE',
+            message: `Are you sure to delete this contact ${user.name}`,
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => dispatch(deletePhonebooks({ id: user.id }))
+                },
+                {
+                    label: 'No'
+                }
+            ]
+        });
+    };
+
+    const handleData = (id, contact) => {
+        dispatch(updateData(id, contact))
+        setIsEdit(false)
     }
 
     if (isEdit) {
@@ -26,7 +44,9 @@ export default function PhoneItem({ user, remove, update }) {
                     <input className='input' type="text" id="nameEdit" value={newData.name} onChange={(e) => setNewData({ ...newData, name: e.target.value })} />
                     <input className='input' type="text" id="phoneEdit" value={newData.phone} onChange={(e) => setNewData({ ...newData, phone: e.target.value })} />
                     <div className="button">
-                        <ButtonSave />
+                        <button className="btn-edit" onClick={() => { handleData(user.id, newData) }}>
+                            <FontAwesomeIcon icon={faFloppyDisk} />
+                        </button>
                     </div>
                 </div>
             </div>
@@ -46,7 +66,7 @@ export default function PhoneItem({ user, remove, update }) {
                         <button className="btn-edit" onClick={() => setIsEdit(!isEdit)}>
                             <FontAwesomeIcon icon={faPenToSquare} />
                         </button>&nbsp;
-                        <button className="btn-delete" onClick={() => remove(user.id)} >
+                        <button className="btn-delete" onClick={() => submit(user)} >
                             <FontAwesomeIcon icon={faTrashCan} />
                         </button>
                     </div>

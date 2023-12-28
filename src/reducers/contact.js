@@ -23,6 +23,15 @@ const contact = (state = initialState, action) => {
                     phone: action.data.phone
                 }
             ]
+        case 'DELETE_PHONEBOOKS_SUCCESS':
+            return { phonebooks: state.phonebooks.filter(data => data.id !== action.data.id) }
+
+        case 'UPDATE_PHONEBOOKS_SUCCESS':
+            console.log('id => ', action)
+            const update = { phonebooks: [...(state.phonebooks.filter((contacts) => contacts.id !== action.data.id)), action.data] }
+            console.log(update.phonebooks.sort((a, b) => a.name.localeCompare(b.name)))
+            return { phonebooks: update.phonebooks.sort((a, b) => a.name.localeCompare(b.name)) }
+
 
         case 'LOAD_PHONEBOOKS_FAILED':
         default:

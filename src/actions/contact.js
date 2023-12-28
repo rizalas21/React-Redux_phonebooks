@@ -24,14 +24,14 @@ export const addPhonebooks = (contact) => dispatch => req.post('phonebooks', con
     dispatch({ type: 'ADD_PHONEBOOKS_FAILED' })
 })
 
-export const deletePhonebooks = (id) => dispatch => req.delete(`phonebooks/${id}`).then(() => {
-    dispatch({ type: 'DELETE_PHONEBOOKS_SUCCESS', id })
+export const deletePhonebooks = ({ id }) => dispatch => req.delete(`phonebooks/${id}`).then(({ data }) => {
+    dispatch({ type: 'DELETE_PHONEBOOKS_SUCCESS', data })
 }).catch((err) => {
     dispatch({ type: 'DELETE_PHONEBOOKS_FAILED' })
 })
 
 export const updateData = (id, contact) => dispatch => req.put(`phonebooks/${id}`, contact).then(({ data }) => {
-    dispatch({ type: 'UPDATE_PHONEBOOKS_SUCCESS', phonebooks: data })
+    dispatch({ type: 'UPDATE_PHONEBOOKS_SUCCESS', data })
 }).catch((err) => {
     dispatch({ type: 'UPDATE_PHONEBOOKS_FAILED' })
 })
