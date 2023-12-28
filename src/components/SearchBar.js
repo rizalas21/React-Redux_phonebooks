@@ -1,10 +1,10 @@
-import { faArrowDownZA, faArrowUpAZ, faArrowUpZA, faMagnifyingGlass, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDownZA, faArrowUpAZ, faMagnifyingGlass, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import '../app.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from 'react-router-dom'
 
 
-function BtnAsc({ sort, setSort }) {
+function BtnAsc({ setSort }) {
     return (
         <button className="btn-icon" onClick={() => {
             setSort('desc')
@@ -14,20 +14,12 @@ function BtnAsc({ sort, setSort }) {
     )
 }
 
-function BtnDesc({ sort, setSort }) {
+function BtnDesc({ setSort }) {
     return (
         <button className="btn-icon" onClick={() => {
             setSort('asc')
         }}>
             <FontAwesomeIcon icon={faArrowDownZA} id="center" />
-        </button>
-    )
-}
-
-function BtnAdd() {
-    return (
-        <button className="btn-icon">
-            <FontAwesomeIcon icon={faUserPlus} />
         </button>
     )
 }
@@ -52,7 +44,9 @@ export default function SearchBar({ keyword, setKeyword, sort, setSort }) {
                 </div>
                 <div className="icon">
                     <Link to={"/add"}>
-                        <BtnAdd />
+                        <button className="btn-icon">
+                            <FontAwesomeIcon icon={faUserPlus} />
+                        </button>
                     </Link>
                 </div>
             </div>

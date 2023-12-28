@@ -8,7 +8,7 @@ import { deletePhonebooks, updateData } from '../actions/contact'
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
-export default function PhoneItem({ user, update }) {
+export default function PhoneItem({ user }) {
     const [isEdit, setIsEdit] = useState(false)
     const [newData, setNewData] = useState({ name: user.name, phone: user.phone })
     const dispatch = useDispatch()

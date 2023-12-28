@@ -36,13 +36,13 @@ export const updateData = (id, contact) => dispatch => req.put(`phonebooks/${id}
     dispatch({ type: 'UPDATE_PHONEBOOKS_FAILED' })
 })
 
-export const UpdateAvatar = (id, avatar) => dispatch => req.put(`phonebooks/${id}/avatar`, avatar, {
+export const UpdateAvatar = (id, formData) => dispatch => req.put(`phonebooks/${id}/avatar`, formData, {
     headers: {
         'Content-Type': 'multipart/form-data'
     }
-}).then(({ data }) => [
+}).then(({ data }) => {
     dispatch({ type: 'UPDATE_AVATAR_SUCCESS', data })
-]).catch((err) => {
+}).catch((err) => {
     dispatch({ type: 'UPDATE_AVATAR_FAILED' })
 })
 

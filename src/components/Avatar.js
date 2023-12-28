@@ -1,12 +1,16 @@
 import { faFloppyDisk, faRotateLeft } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
+import { useDispatch } from "react-redux"
+import { UpdateAvatar } from "../actions/contact"
 
-export default function Avatar({ UpdateAvatar, avatar, setAvatar }) {
+export default function Avatar() {
     const { id } = useParams()
     let navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [avatar, setAvatar] = useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,13 +22,14 @@ export default function Avatar({ UpdateAvatar, avatar, setAvatar }) {
                 console.error("Error fetching item data:", error);
             }
         };
-
         fetchData();
     }, [id]);
 
     const submitAvatar = (e) => {
         e.preventDefault()
-        UpdateAvatar(id, avatar)
+        const formData = new FormData()
+        formData.append('avatar', avatar)
+        dispatch(UpdateAvatar(id, formData))
         navigate('/')
     }
 

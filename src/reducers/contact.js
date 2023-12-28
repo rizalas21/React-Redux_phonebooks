@@ -15,22 +15,33 @@ const contact = (state = initialState, action) => {
             return { ...state, phonebooks: [...state.phonebooks, ...action.data.phonebooks], page: action.data.page }
 
         case 'ADD_PHONEBOOKS_SUCCESS':
-            return [
-                ...state, ...state.phonebooks.filter(data => data.id !== action.data.id),
-                {
-                    id: action.data.id,
-                    name: action.data.name,
-                    phone: action.data.phone
-                }
-            ]
+            return state.map((item) => {
+                if (item.id === action.data.id) item.id = action.data.id;
+                return item;
+            });
         case 'DELETE_PHONEBOOKS_SUCCESS':
             return { phonebooks: state.phonebooks.filter(data => data.id !== action.data.id) }
 
         case 'UPDATE_PHONEBOOKS_SUCCESS':
-            console.log('id => ', action)
-            const update = { phonebooks: [...(state.phonebooks.filter((contacts) => contacts.id !== action.data.id)), action.data] }
-            console.log(update.phonebooks.sort((a, b) => a.name.localeCompare(b.name)))
-            return { phonebooks: update.phonebooks.sort((a, b) => a.name.localeCompare(b.name)) }
+            return {
+                phonebooks: state.phonebooks.map((item) => {
+                    if (item.id === action.data.id) {
+                        item.name = action.data.name;
+                        item.phone = action.data.phone;
+                    }
+                    return item
+                })
+            }
+
+        case 'UPDATE_AVATAR_SUCCESS':
+            return {
+                phonebooks: state.phonebooks.map((item) => {
+                    if (item.id === action.data.id) {
+                        item.avatar = action.data.avatar;
+                    }
+                    return item
+                })
+            }
 
 
         case 'LOAD_PHONEBOOKS_FAILED':
