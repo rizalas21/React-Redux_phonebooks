@@ -16,7 +16,7 @@ export default function PhoneList({ keyword, sort }) {
                 if (page < pages) {
                     setIsLoading(true)
                     const newPage = page + 1
-                    dispatch(loadPage({ page: newPage }))
+                    dispatch(loadPage({ page: newPage, keyword, sort }))
                 }
                 else {
                     setIsLoading(false)
@@ -35,7 +35,7 @@ export default function PhoneList({ keyword, sort }) {
         return () => {
             window.removeEventListener('scroll', handleScroll)
         }
-    }, [dispatch, pages, page])
+    }, [dispatch, pages, page, keyword, sort])
 
     useEffect(() => {
         const readData = async () => {

@@ -12,7 +12,7 @@ export const loadPhonebooks = ({ keyword, sort }) => dispatch => req.get(`phoneb
     dispatch({ type: 'LOAD_PHONEBOOKS_FAILED' })
 })
 
-export const loadPage = ({ page }) => dispatch => req.get('phonebooks', { params: { page } }).then(({ data }) => {
+export const loadPage = ({ page, keyword, sort }) => dispatch => req.get('phonebooks', { params: { page, keyword, sort } }).then(({ data }) => {
     dispatch({ type: 'LOAD_PAGE_SUCCESS', data })
 }).catch((err) => {
     dispatch({ type: 'LOAD_PAGE_FAILED' })

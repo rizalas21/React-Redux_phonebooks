@@ -19,8 +19,8 @@ export default function PhoneAdd() {
     return (
         <form className="container" onSubmit={AddData}>
             <div className="container-add">
-                <input type="text" className="input-add" onChange={(e) => setUser({ ...user, name: e.target.value })} />
-                <input type="text" className="input-add" onChange={(e) => setUser({ ...user, phone: e.target.value })} />
+                <input type="text" className="input-add" placeholder='Input Name' required onChange={(e) => setUser({ ...user, name: e.target.value })} />
+                <input type="text" className="input-add" placeholder='Input Phone' required onChange={(e) => setUser({ ...user, phone: e.target.value })} />
                 <div className="btn-add">
                     <button className="btn-save" type='submit'>
                         <p className="p-add">save</p>

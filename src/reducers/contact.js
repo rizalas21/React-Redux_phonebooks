@@ -15,10 +15,7 @@ const contact = (state = initialState, action) => {
             return { ...state, phonebooks: [...state.phonebooks, ...action.data.phonebooks], page: action.data.page }
 
         case 'ADD_PHONEBOOKS_SUCCESS':
-            return state.map((item) => {
-                if (item.id === action.data.id) item.id = action.data.id;
-                return item;
-            });
+            return state
         case 'DELETE_PHONEBOOKS_SUCCESS':
             return { phonebooks: state.phonebooks.filter(data => data.id !== action.data.id) }
 
@@ -45,6 +42,11 @@ const contact = (state = initialState, action) => {
 
 
         case 'LOAD_PHONEBOOKS_FAILED':
+        case 'LOAD_PAGE_FAILED':
+        case 'ADD_PHONEBOOKS_FAILED':
+        case 'DELETE_PHONEBOOKS_FAILED':
+        case 'UPDATE_PHONEBOOKS_FAILED':
+        case 'UPDATE_AVATAR_FAILED':
         default:
             return state
     }
